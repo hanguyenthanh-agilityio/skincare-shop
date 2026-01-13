@@ -16,6 +16,7 @@ export const MOCK_PRODUCTS: TProduct[] = [
       name: 'sensitive',
       slug: 'sensitive',
     },
+
     images: [
       {
         url: 'https://www.gloskinbeauty.com/cdn/shop/articles/668448456942_0f2549ad-4f14-4e19-81c6-23fa6fca465d.jpg?v=1760637019',
