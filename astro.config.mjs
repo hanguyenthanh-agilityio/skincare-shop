@@ -6,7 +6,7 @@ import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://skincare-commerce.pages.dev',
+  site: 'https://skincare-shop.pages.dev',
 
   integrations: [
     react({
@@ -20,10 +20,13 @@ export default defineConfig({
 
     resolve: {
       conditions: ['worker'],
+      alias: {
+        'react-dom/server': 'react-dom/server.edge',
+      },
     },
 
     ssr: {
-      external: ['react-dom/server'],
+      noExternal: ['react-dom'],
     },
 
     build: {
@@ -46,18 +49,7 @@ export default defineConfig({
     },
   },
 
-  build: {
-    inlineStylesheets: 'auto',
-  },
-
   output: 'server',
 
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-      persist: {
-        path: './.cache/wrangler/v3',
-      },
-    },
-  }),
+  adapter: cloudflare(),
 });
