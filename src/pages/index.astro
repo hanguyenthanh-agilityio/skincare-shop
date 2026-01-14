@@ -1,3 +1,7 @@
 ---
-return Astro.redirect('/en', 302);
+import Home from './[locale]/index.astro';
+
+Astro.params.locale = 'en';
 ---
+
+<Home />
