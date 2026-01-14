@@ -8,9 +8,14 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://skincare-shop.pages.dev',
 
+  output: 'server',
+
+  adapter: cloudflare(),
+
   integrations: [
     react({
       experimentalReactChildren: true,
+      experimentalDisableStreaming: true,
     }),
     sitemap(),
   ],
@@ -34,17 +39,6 @@ export default defineConfig({
       ],
     },
 
-    // resolve: {
-    //   conditions: ['worker'],
-    //   alias: {
-    //     'react-dom/server': 'react-dom/server.edge',
-    //   },
-    // },
-
-    // ssr: {
-    //   noExternal: ['react-dom'],
-    // },
-
     build: {
       rollupOptions: {
         onwarn(warning, warn) {
@@ -64,8 +58,4 @@ export default defineConfig({
       fallbackType: 'rewrite',
     },
   },
-
-  output: 'server',
-
-  adapter: cloudflare(),
 });
