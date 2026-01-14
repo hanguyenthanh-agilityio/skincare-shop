@@ -43,12 +43,5 @@ export default defineConfig({
   },
 
   output: 'server',
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-      persist: {
-        path: './.cache/wrangler/v3',
-      },
-    },
-  }),
+  adapter: cloudflare(),
 });
