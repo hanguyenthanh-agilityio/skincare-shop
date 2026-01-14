@@ -1,12 +1,10 @@
-name = "skincare-e-commerce"
-
-pages_build_output_dir = "dist"
-
+name = "skincare-shop"
 compatibility_date = "2024-12-01"
 
-[observability]
-enabled = true
+compatibility_flags = [
+  "nodejs_compat"
+]
 
-[[kv_namespaces]]
-binding = "SESSION"
-id = "b7a2c153884a43b6a0341570a8575b3b"
+kv_namespaces = [
+  { binding = "SESSION", id = "21fe10c5114845da95d576f5f4ff4eee" }
+]
