@@ -18,16 +18,32 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
 
-    resolve: {
-      conditions: ['worker'],
-      alias: {
-        'react-dom/server': 'react-dom/server.edge',
-      },
+    optimizeDeps: {
+      exclude: [
+        'eslint',
+        '@eslint/js',
+        'eslint-plugin-react',
+        'eslint-plugin-react-hooks',
+        'eslint-plugin-jsx-a11y',
+        'eslint-plugin-import',
+        'eslint-plugin-astro',
+        'eslint-plugin-storybook',
+        '@typescript-eslint/eslint-plugin',
+        '@typescript-eslint/parser',
+        'eslint-config-prettier',
+      ],
     },
 
-    ssr: {
-      noExternal: ['react-dom'],
-    },
+    // resolve: {
+    //   conditions: ['worker'],
+    //   alias: {
+    //     'react-dom/server': 'react-dom/server.edge',
+    //   },
+    // },
+
+    // ssr: {
+    //   noExternal: ['react-dom'],
+    // },
 
     build: {
       rollupOptions: {
