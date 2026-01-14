@@ -1,0 +1,12 @@
+name = "skincare-e-commerce"
+
+pages_build_output_dir = "dist"
+
+compatibility_date = "2024-12-01"
+
+[observability]
+enabled = true
+
+[[kv_namespaces]]
+binding = "SESSION"
+id = "21fe10c5114845da95d576f5f4ff4eee"
