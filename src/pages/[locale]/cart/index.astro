@@ -2,20 +2,20 @@
 // Layouts
 import { BaseLayout } from '@/layouts';
 
-// // I18n
-// import { loadContent } from '@/i18n';
+// I18n
+import { loadContent } from '@/i18n';
 
-// // Types
-// import type { CartContent } from '@/types';
+// Types
+import type { CartContent } from '@/types';
 
-// // Section
-// import { CartInfo } from '@/sections';
+// Section
+import { CartInfo } from '@/sections';
 
 // Constants
 import { isLocale, ROUTER } from '@/constants';
 
 // Service
-// import { getCartByUser } from '@/services';
+import { getCartByUser } from '@/services';
 
 const { locale } = Astro.params;
 
@@ -23,17 +23,16 @@ if (!locale || !isLocale(locale)) {
   return Astro.redirect(ROUTER.NOT_FOUND);
 }
 
-// const content = loadContent<CartContent>('cart', locale);
+const content = loadContent<CartContent>('cart', locale);
 
-// // Will update when handle Login
-// const USER_DOCUMENT_ID = 'vv32wq5ctzuk15aypvm747qd';
+// Will update when handle Login
+const USER_DOCUMENT_ID = 'w9vowcg1y2rrph1h6eaiic7y';
 
-// const items = await getCartByUser({
-//   userDocumentId: USER_DOCUMENT_ID,
-// });
+const items = await getCartByUser({
+  userDocumentId: USER_DOCUMENT_ID,
+});
 ---
 
 <BaseLayout {locale}>
-  <!-- <CartInfo content={content} items={items} client:load /> -->
-  <h1>Test</h1>
+  <CartInfo content={content} items={items} client:load />
 </BaseLayout>

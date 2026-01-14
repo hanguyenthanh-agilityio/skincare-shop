@@ -1,9 +1,13 @@
+/// <reference types="astro/client" />
 // @ts-check
+
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
+
+const isProd = import.meta.env.MODE === 'production';
 
 export default defineConfig({
   site: 'https://skincare-shop.pages.dev',
@@ -23,17 +27,19 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
 
-    ssr: {
-      target: 'webworker',
-      noExternal: ['react', 'react-dom'],
-    },
-
-    resolve: {
-      alias: {
-        'react-dom/server': 'react-dom/server.edge',
-        'react-dom/server.browser': 'react-dom/server.edge',
+    ...(isProd && {
+      ssr: {
+        target: 'webworker',
+        noExternal: ['react', 'react-dom'],
       },
-    },
+
+      resolve: {
+        alias: {
+          'react-dom/server': 'react-dom/server.edge',
+          'react-dom/server.browser': 'react-dom/server.edge',
+        },
+      },
+    }),
 
     optimizeDeps: {
       exclude: [
