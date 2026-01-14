@@ -34,5 +34,5 @@ const items = await getCartByUser({
 ---
 
 <BaseLayout {locale}>
-  <CartInfo content={content} items={items} client:load />
+  <CartInfo content={content} items={items} client:only="react" />
 </BaseLayout>
