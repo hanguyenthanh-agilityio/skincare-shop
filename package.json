@@ -7,6 +7,7 @@
     "cf:types": "wrangler types",
     "build": "astro build",
     "preview": "pnpm build && wrangler pages dev ./dist",
+    "preview:wrangler": "wrangler pages dev ./dist",
     "astro": "astro",
     "prepare": "husky",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",

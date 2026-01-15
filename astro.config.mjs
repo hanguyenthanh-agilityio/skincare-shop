@@ -1,36 +1,37 @@
+// <reference types="astro/client" />
+// @ts-check
+
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-
 import cloudflare from '@astrojs/cloudflare';
-import node from '@astrojs/node';
-
-const isCloudflare = import.meta.env.CF_PAGES === '1';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: isCloudflare ? 'https://skincare-shop.pages.dev' : 'http://localhost:4321',
+  site: 'https://skincare-shop.pages.dev',
 
   output: 'server',
+  adapter: cloudflare(),
 
-  adapter: isCloudflare ? cloudflare() : node({ mode: 'standalone' }),
-
-  integrations: [react({ experimentalDisableStreaming: true }), sitemap()],
+  integrations: [
+    react({
+      experimentalDisableStreaming: true,
+      experimentalReactChildren: true,
+    }),
+    sitemap(),
+  ],
 
   vite: {
     plugins: [tailwindcss()],
-    ...(isCloudflare && {
-      ssr: {
-        target: 'webworker',
-        noExternal: ['react', 'react-dom'],
+    ssr: {
+      noExternal: ['react', 'react-dom'],
+    },
+    resolve: {
+      alias: {
+        // Fix for React SSR on Workers (issue #12824)
+        'react-dom/server': 'react-dom/server.edge',
       },
-      resolve: {
-        alias: {
-          'react-dom/server': 'react-dom/server.edge',
-          'react-dom/server.browser': 'react-dom/server.edge',
-        },
-      },
-    }),
+    },
   },
 
   i18n: {
