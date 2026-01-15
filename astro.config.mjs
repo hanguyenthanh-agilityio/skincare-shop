@@ -17,13 +17,12 @@ export default defineConfig({
     plugins: [tailwindcss()],
     resolve: {
       conditions: ['workerd', 'worker', 'browser'],
-      alias:
-        // @ts-ignore
-        import.meta.env.PROD === 'production'
-          ? {
-              'react-dom/server': 'react-dom/server.edge',
-            }
-          : undefined,
+      // @ts-ignore
+      alias: import.meta.env.PROD
+        ? {
+            'react-dom/server': 'react-dom/server.edge',
+          }
+        : undefined,
     },
     build: {
       rollupOptions: {
