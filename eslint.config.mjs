@@ -14,7 +14,7 @@ import prettier from 'eslint-config-prettier';
 
 export default [
   {
-    ignores: ['dist', 'node_modules'],
+    ignores: ['dist', 'dist/**', '.astro', '.vite', '.cloudflare', 'node_modules', 'coverage'],
   },
   js.configs.recommended,
 
@@ -23,6 +23,10 @@ export default [
     languageOptions: {
       globals: {
         fetch: 'readonly',
+        Request: 'readonly',
+        Response: 'readonly',
+        Headers: 'readonly',
+        MessageChannel: 'readonly',
         URL: 'readonly',
         URLSearchParams: 'readonly',
         console: 'readonly',
@@ -39,6 +43,8 @@ export default [
     },
     rules: {
       ...tseslint.configs.recommended.rules,
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     },
   },
   {
